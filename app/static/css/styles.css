@@ -1,0 +1,21 @@
+body {
+    background-color: #9B786F;
+    color: white;
+}
+
+.navbar{
+    background-color: #9D8D8F !important;
+    color: white important;
+}
+
+.navbar-brand{
+    color: #FAED26 !important;
+}
+
+.navul a {
+    color: white !important;
+}
+
+.sign a{
+    color: white !important;
+}

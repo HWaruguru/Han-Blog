@@ -1,3 +1,9 @@
+html body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #9D8D8F;
     color: white;
@@ -20,13 +26,10 @@ body {
     color: white !important;
 }
 
-.card {
+.card_blogs {
     background-color: #5A5560;
     width: 50rem;
     margin: 10px;
-    display: flex ;
-    justify-content: center;
-    
 }
 
 h5 {
@@ -56,4 +59,29 @@ h5 {
     display: inline-block;
     margin-right: 10px;
     color: #FAED2E;
+}
+
+.quote {
+    background-color: #46344E;
+    color: white;
+    padding: 10px;
+    width: 28rem;
+    font-size: 18px;
+}
+
+.quote-author {
+    color: #FAED2E;
+}
+
+.blog-container {
+    display: flex;
+    flex-direction: row;
+    height: 90vh;
+    overflow: scroll;
+}
+
+.quote-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

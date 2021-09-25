@@ -41,5 +41,7 @@ def index():
             "heart": 1
         }
     ]
+    
+    quote = {"quote": "Perl – The only language that looks the same before and after RSA encryption.", "author": "Keith Bostic"}
 
-    return render_template("index.html", blogs=blogs)
+    return render_template("index.html", blogs=blogs, quote=quote)

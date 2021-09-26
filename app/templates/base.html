@@ -39,6 +39,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Culture</a>
                 </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('main.add_blog')}}">Add Blog</a>
+                </li>
+                {% endif %}
             </ul>
             <span class=" form-inline my-2 my-lg-0 auth sign">
                 {% if current_user.is_authenticated %}

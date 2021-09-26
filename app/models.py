@@ -64,9 +64,14 @@ class Blog(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     comments = db.relationship('Comment',backref='blog',lazy="dynamic")
 
-    def save_pitch(self):
+    def save_blog(self):
         db.session.add(self)
         db.session.commit()
+
+    @property
+    def preview(self):
+        return self.content[:300] + '...'
+
 
     @classmethod
     def get_blogs(cls, user_id):

@@ -1,0 +1,4 @@
+Hello {{user.username}}
+Welcome to Han Blogs.
+We have just seen you have signed up for our application and want to welcome you to the family.
+Please add your blog and also leave a comment under the available blogs.

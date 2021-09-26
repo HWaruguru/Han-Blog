@@ -33,7 +33,7 @@ Writers can:
 * In your terminal:
         
         $ git clone https://github.com/HWaruguru/Han-Blog.git
-        $ cd One-Minute-Pitch
+        $ cd Han-Blog
 
 ## Running the Application
 * To run the application:

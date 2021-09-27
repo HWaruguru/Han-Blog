@@ -113,4 +113,11 @@ class Comment(db.Model):
         return f'Comment {self.id}'
 
 
+class Subscribe(db.Model):
+    __tablename__ = 'subscibe'
 
+    id = db.Column(db.Integer,primary_key = True)
+    email = db.Column(db.String(255),unique = True,index = True)
+
+    def __repr__(self):
+        return f'Subscribe {self.email}'

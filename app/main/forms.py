@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,TextAreaField,SubmitField
 from wtforms.fields.core import SelectField
-from wtforms.validators import Required
+from wtforms.validators import Email, Required
 
 class CommentForm(FlaskForm):
     comment = TextAreaField('Add comment',validators=[Required()])
@@ -13,6 +13,12 @@ class BlogForm(FlaskForm):
     category = SelectField('Category', choices = category_choices, validators = [Required()])
     content = TextAreaField('Blog', validators=[Required()])
     submit = SubmitField('Submit')
+
+class SubscribeForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[Required(), Email(message="Not a valid email address")])
+    submit = SubmitField('Subscibe')
+
+
 
 
 

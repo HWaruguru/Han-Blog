@@ -82,6 +82,7 @@ h5 {
 
 .quote-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -112,4 +113,14 @@ h5 {
     color: tomato !important;
     cursor: pointer;
     margin-right: 20px;
+  }
+
+  .subscribe {
+      margin-top: 20px;
+  }
+
+  .edit-blog a {
+      display:inline;
+      font-size: 15px;
+      color: white;
   }

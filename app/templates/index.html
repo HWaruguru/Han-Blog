@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% import 'bootstrap/wtf.html' as wtf%} {% block body
+%}
 <div class="container-fluid blog-container">
   <div class="col-md-8">
     <div class="blogs">
@@ -11,7 +11,9 @@
           <a class="continue" href="/blog/{{blog.id}}">Continue Reading</a>
         </div>
         <div class="card-footer">
-          <p class="card-text blogsmall"><small>{{ blog.date_published }}</small></p>
+          <p class="card-text blogsmall">
+            <small>{{ blog.date_published }}</small>
+          </p>
           <span class="heart">
             <span class="heart">
               <a href=""
@@ -33,6 +35,10 @@
           <small> {{ quote.author }} </small>
         </footer>
       </blockquote>
+    </div>
+    <div class="subscribe">
+      <h4>Subscribe to our newsletter</h4>
+      {{wtf.quick_form(subscribe_form)}}
     </div>
   </div>
 </div>

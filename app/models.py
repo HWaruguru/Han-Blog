@@ -80,7 +80,7 @@ class Blog(db.Model):
     
     @classmethod
     def get_all_blogs(cls):
-        blogs = Blog.query.all()
+        blogs = Blog.query.order_by(Blog.date_published.desc()).all()
         return blogs
 
     @classmethod

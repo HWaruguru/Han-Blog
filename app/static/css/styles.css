@@ -85,3 +85,31 @@ h5 {
     justify-content: center;
     align-items: center;
 }
+
+.card_blogs a{
+    color: #FAED2E;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.comment_card p {
+    color: black;
+}
+
+.comment_card {margin-top: 2rem;}
+
+.delete {
+    float: right;
+    margin: 4px;
+    font-size: 18px;
+    color: tomato;
+    cursor: pointer;
+  }
+
+  .delete-blog a {
+    margin: 4px;
+    font-size: 18px;
+    color: tomato !important;
+    cursor: pointer;
+    margin-right: 20px;
+  }

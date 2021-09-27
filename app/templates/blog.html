@@ -12,13 +12,17 @@
           <p class="card-text blogsmall">
             <small>{{ blog.date_published }}</small>
           </p>
+          {% if current_user.is_authenticated and current_user.is_writer %}
           <span class="edit-blog">
             <a type="button" href="/blog/{{blog.id}}/update">Edit Blog</a>
           </span>
+          {% endif %}
           <span class="heart">
+            {% if current_user.is_authenticated and current_user.is_writer %}
             <span class="delete-blog">
               <a href=" /delete/blog/{{ blog.id }}"><i class="fa fa-fw fa-trash"></i></a>
             </span>
+            {% endif %}
             <span class="heart">
               <a href="/blog/{{blog.id}}/like"><i class="fas fa-heart"></i>
                 {{ blog.hearts }}
@@ -30,7 +34,11 @@
     </div>
   </div>
   <div class="col-md-4">
-    {{wtf.quick_form(comment_form)}}
+    {% if current_user.is_authenticated %}
+      {{wtf.quick_form(comment_form)}}
+    {% else %}
+      Please sign-in to add your comment.
+    {% endif %}
     <div class="card comment_card" style="width: 100%">
       {% if comments.count() > 0 %} {% for comment in comments %}
       <div class="card-body">
@@ -38,7 +46,9 @@
           <p>{{comment.comment}}</p>
           <footer class="blockquote-footer">{{user.username}}</footer>
         </blockquote>
+        {% if current_user.is_authenticated and current_user.is_writer %}
         <a href="/blog/{{ blog.id }}/delete/comment/{{ comment.id }}"><i class="fa fa-fw fa-trash delete"></i></a>
+        {% endif %}
       </div>
 
       {% endfor %} {% else %}

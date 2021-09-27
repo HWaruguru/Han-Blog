@@ -18,6 +18,10 @@ class SubscribeForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(), Email(message="Not a valid email address")])
     submit = SubmitField('Subscibe')
 
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')
+
 
 
 

@@ -1,12 +1,13 @@
+from app.email import mail_message
 from flask.helpers import url_for
 from werkzeug.utils import redirect
 from flask import render_template, request, abort
 from flask_login import login_required, current_user
 from app.models import Comment, Blog, User, Subscribe
-from app.main.forms import CommentForm, BlogForm, SubscribeForm
+from app.main.forms import CommentForm, BlogForm, SubscribeForm, UpdateProfile
 from ..requests import get_quote
 from . import main
-from .. import db
+from .. import db, photos
 
 # Views
 @main.route("/", methods=["GET", "POST"])
@@ -38,8 +39,10 @@ def add_blog():
         )
         db.session.add(blog)
         db.session.commit()
+        subscribers = Subscribe.query.all()
+        to = [sub.email for sub in subscribers]
+        mail_message("New Blog Alert","email/welcome_user", to, url=request.url_root, blog=blog)
         return redirect(url_for("main.index"))
-
     title = "Add Blog"
     return render_template("new_blog.html", blog_form=form, title=title)
 
@@ -110,3 +113,44 @@ def like(id):
     blog.hearts = blog.hearts + 1
     db.session.commit()
     return redirect(url_for("main.blog", id=id))
+
+@main.route("/user/<uname>")
+@login_required
+def profile(uname):
+    user = User.query.filter_by(username=uname).first()
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user=user)
+
+
+@main.route("/user/<uname>/update", methods=["GET", "POST"])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username=uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for("main.profile", uname=user.username))
+
+    return render_template("profile/update.html", form=form)
+
+
+@main.route("/user/<uname>/update/pic", methods=["POST"])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username=uname).first()
+    if "photo" in request.files:
+        filename = photos.save(request.files["photo"])
+        path = f"photos/{filename}"
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for("main.profile", uname=uname))

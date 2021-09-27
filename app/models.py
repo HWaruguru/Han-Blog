@@ -30,8 +30,14 @@ class User(UserMixin,db.Model):
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
-    blogs = db.relationship('Blog',backref='user',lazy="dynamic")
+    blogs = db.relationship('Blog', backref='user', lazy="dynamic")
 
+    @property
+    def is_writer(self):
+        if not self.role_id:
+            return False
+        role = Role.query.filter_by(id=self.role_id).one()
+        return role.name == "Writer"
 
     @property
     def password(self):
@@ -71,7 +77,6 @@ class Blog(db.Model):
     @property
     def preview(self):
         return self.content[:300] + '...'
-
 
     @classmethod
     def get_blogs(cls, user_id):
